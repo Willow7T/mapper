@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GPS-enabled Map</title>
+    <!-- Load Leaflet CSS and JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-sA+zSTqgK1B0g2aB04AV3J1PslK+1qXVsL/5ygg/M6M=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-kGQx1SuOLbQvFu94vx8YjBqj1s6jb0UJwJ4cuhTUuc8=" crossorigin=""></script>
+    <style>
+        #map { height: 100vh; width: 100%; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        // Initialize the map and set default view
+        var map = L.map('map').setView([51.505, -0.09], 13); // Default center (e.g., London)
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Check if geolocation is available and get user’s position
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var userLocation = [position.coords.latitude, position.coords.longitude];
+                map.setView(userLocation, 15);
+
+                // Add a marker at the user's location
+                L.marker(userLocation).addTo(map)
+                    .bindPopup("You are here!")
+                    .openPopup();
+            }, function() {
+                alert("Geolocation permission denied.");
+            });
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    </script>
+</body>
+</html>
