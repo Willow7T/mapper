@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>GPS-enabled Map</title>
-    <!-- Load Leaflet CSS and JS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-sA+zSTqgK1B0g2aB04AV3J1PslK+1qXVsL/5ygg/M6M=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-kGQx1SuOLbQvFu94vx8YjBqj1s6jb0UJwJ4cuhTUuc8=" crossorigin=""></script>
     <style>
@@ -23,7 +22,6 @@
                 var userLocation = [position.coords.latitude, position.coords.longitude];
                 map.setView(userLocation, 15);
 
-                // Add a marker at the user's location
                 L.marker(userLocation).addTo(map)
                     .bindPopup("You are here!")
                     .openPopup();
